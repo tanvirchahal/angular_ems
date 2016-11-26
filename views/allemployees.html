@@ -1,0 +1,27 @@
+<div class="row" ng-init="getEmployee()">
+    <div class="col-md-12">
+        <h3 class="well">All Employees</h3>
+        {{ test }}
+        <br/>
+
+        <hr/>
+        <input type="text" class="form-control" placeholder="Search Employee" ng-model="search"/>
+        <br/>
+        <table class="table table-striped">
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Employee Address</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="employee in details | filter:search ">
+                <td>{{ employee.empid }} </td>
+                <td>{{ employee.empname }} </td>
+                <td>{{ employee.empaddr }}</td>
+                <td> <a href="#/editemployee/{{ employee.empid }}"> <button class="btn btn-success"> <span class="glyphicon glyphicon-pencil"></span> </button> </a> </td>
+                <td> <a href=""> <button class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> </button> </a> </td>
+            </tr>
+        </table>
+    </div>
+</div>

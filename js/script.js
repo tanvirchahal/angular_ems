@@ -25,6 +25,17 @@ app.controller('allemployees',['$scope','$http',function($scope,$http){
            $scope.details = data; 
         });
     };
+    
+    $scope.deleteEmployee = function(empid){
+        var request = {
+           method: 'POST',
+           url:'database/deleteemployee.php',
+           data: {'empid':empid}
+       };
+        $http(request).success(function(data){
+            
+        });
+    };
 }]);
 
 app.controller('addemployee',['$scope','$http',function($scope,$http){
@@ -48,9 +59,28 @@ app.controller('editemployee',['$scope','$http','$routeParams',function($scope,$
     var empid = $routeParams.id;
     
     $scope.fetchDetails = function(){
-       $http().success(function(data){
-           
-       });
+       var request = {
+           method: 'POST',
+           url:'database/getoneemployee.php',
+           data: {'empid':empid}
+       };
+       $http(request).success(function(data){
+           $scope.empname= data[0].empname;
+           $scope.empaddr= data[0].empaddr;
+       }); 
     };
+    
+    $scope.editEmployee = function(){
+        var request = {
+           method:'POST',
+           url:'database/editemployee.php',
+           data: {'empid':empid,'empname':$scope.empname,'empaddr':$scope.empaddr}
+        }
+        
+        $http(request).success(function(data){
+            alert('Edited Successfully');
+        });
+    }
 }]);
+
 
